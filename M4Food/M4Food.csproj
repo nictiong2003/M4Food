@@ -63,6 +63,12 @@
 		<!-- Align Activity + Activity.Ktx to stop duplicate kotlin extensions -->
 		<PackageReference Include="Xamarin.AndroidX.Activity" Version="1.9.0.3" Condition="'$(TargetFramework)' == 'net8.0-android'" />
 		<PackageReference Include="Xamarin.AndroidX.Activity.Ktx" Version="1.9.0.3" Condition="'$(TargetFramework)' == 'net8.0-android'" ExcludeAssets="all" />
+		
+		<!-- SQLite for local storage -->
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		
+		<!-- Cloudinary for image storage -->
+		<PackageReference Include="CloudinaryDotNet" Version="1.20.0" />
 	</ItemGroup>
 	
 	<!-- Remove conflicting AndroidX collection ktx jar files at multiple build stages -->

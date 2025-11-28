@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
 using Plugin.Firebase.Auth;
+using M4Food.Services;
 #if ANDROID
 using Plugin.Firebase.Auth.Google;
 using Plugin.Firebase.Core.Platforms.Android;
@@ -20,13 +21,31 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             })
-            .RegisterFirebaseServices();
+            .RegisterFirebaseServices()
+            .RegisterServices();
 
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
 
         return builder.Build();
+    }
+
+    private static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
+    {
+        // Register local storage service
+        builder.Services.AddSingleton<ILocalCacheService, LocalCacheService>();
+        
+        // Register Cloudinary service
+        builder.Services.AddSingleton<ICloudinaryService, CloudinaryService>();
+        
+        // Register offline map tile cache service
+        builder.Services.AddSingleton<IMapTileCacheService, MapTileCacheService>();
+        
+        // Register offline route service
+        builder.Services.AddSingleton<IOfflineRouteService, OfflineRouteService>();
+        
+        return builder;
     }
 
     private static MauiAppBuilder RegisterFirebaseServices(this MauiAppBuilder builder)
