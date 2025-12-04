@@ -84,10 +84,10 @@ namespace M4Food.Views
             await DisplayAlert("Cart", "Opening your shopping cart...", "OK");
         }
 
-        // 9. Account Button
+        //9. Profile Navigation
         private async void OnAccountTapped(object sender, EventArgs e)
         {
-            await DisplayAlert("Account", "Opening user profile...", "OK");
+            await Navigation.PushAsync(new M4Food.Views.ProfilePage());
         }
     }
 }
